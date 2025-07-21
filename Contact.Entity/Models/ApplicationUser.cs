@@ -9,8 +9,10 @@ namespace Contact.Entity.Models
 {
     public class ApplicationUser : IdentityUser
     { 
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public ICollection<ContactUser> Contacts { get; set; }
 
     }
 }

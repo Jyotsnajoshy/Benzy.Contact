@@ -9,27 +9,34 @@ using System.Threading.Tasks;
 
 namespace Contact.Entity.Configuration
 {
-   
-        public class ContactConfiguration : IEntityTypeConfiguration<ContactUser>
+
+    public class ContactConfiguration : IEntityTypeConfiguration<ContactUser>
+    {
+        public void Configure(EntityTypeBuilder<ContactUser> builder)
         {
-            public void Configure(EntityTypeBuilder<ContactUser> builder)
-            {
-                builder.HasKey(u => u.Id);
+            builder.HasKey(u => u.Id);
 
-                builder.Property(u => u.FirstName)
-                   .HasMaxLength(50)
-                   .IsRequired();
+            builder.Property(u => u.FirstName)
+               .HasMaxLength(50)
+               .IsRequired();
 
-                builder.Property(u => u.LastName)
-                        .HasMaxLength(50)
-                        .IsRequired();
+            builder.Property(u => u.LastName)
+                    .HasMaxLength(50)
+                    .IsRequired();
 
-                builder.Property(u => u.PhoneNumber)
-                        .IsRequired(true);
+            builder.Property(u => u.PhoneNumber)
+                    .HasMaxLength(50)
+                    .IsRequired();
 
-           
+            builder.Property(u => u.Email)
+                      .HasMaxLength(100)
+                      .IsRequired();
 
-            }
+            builder.Property(u => u.Address)
+                    .HasMaxLength(50);
+
 
         }
+
     }
+}

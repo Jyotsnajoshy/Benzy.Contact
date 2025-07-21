@@ -12,11 +12,13 @@ namespace Contact.Entity.Configuration;
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-            builder.Property(u => u.FirstName)
+        builder.HasKey(u => u.Id);
+
+        builder.Property(u => u.FirstName)
                .HasMaxLength(50)
                .IsRequired();
 
-            builder.Property(u => u.LastName)
+         builder.Property(u => u.LastName)
                     .HasMaxLength(50)
                     .IsRequired();
 
