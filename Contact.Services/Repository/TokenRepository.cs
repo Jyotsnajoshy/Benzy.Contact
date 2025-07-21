@@ -13,13 +13,10 @@ namespace Contact.Services.Repository
     {
 
     private readonly IConfiguration _configuration;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-
-        public TokenRepository(IConfiguration configuration, UserManager<ApplicationUser> userManager)
+        public TokenRepository(IConfiguration configuration)
         {
             _configuration = configuration;
-            _userManager = userManager;
         }
         public async Task<TokenResponseDto> GenerateToken(ApplicationUser userInfo)
         {
@@ -28,13 +25,14 @@ namespace Contact.Services.Repository
                     new Claim(JwtRegisteredClaimNames.Sub, userInfo.Id),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(ClaimTypes.NameIdentifier, userInfo.Id),
+                    new Claim(ClaimTypes.Role, "User")
                 };
-            var roles = await _userManager.GetRolesAsync(userInfo);
+            //var roles = await _userManager.GetRolesAsync(userInfo);
 
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            }
+            //foreach (var role in roles)
+            //{
+            //    claims.Add(new Claim(ClaimTypes.Role, role));
+            //}
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

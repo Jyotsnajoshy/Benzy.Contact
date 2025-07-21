@@ -3,6 +3,7 @@ using System.Security.Claims;
 using Contact.Services.Dtos;
 using Contact.Services.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,6 +11,7 @@ namespace Benzy.Contact.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ContactController : ControllerBase
     {
         private readonly IContactRepository _contactRepository;
